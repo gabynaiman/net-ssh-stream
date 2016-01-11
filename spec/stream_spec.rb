@@ -30,4 +30,11 @@ describe Net::SSH::Stream do
     assert_equal "bash: invalid-command: command not found", stderr.read.strip
   end
 
+  it 'Raise exception' do
+    Net::SSH::Stream.start 'localhost', username do |stram|
+      stram.exec! 'pwd', stdout: StringIO.new
+      Proc.new { stram.exec! 'invalid-command', stderr: StringIO.new }.must_raise RuntimeError
+    end
+  end
+
 end

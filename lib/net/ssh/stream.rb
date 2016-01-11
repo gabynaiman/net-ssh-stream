@@ -45,9 +45,15 @@ module Net
         exit_code
       end
 
+      def exec!(command, stdout: STDOUT, stderr: STDERR)
+        exit_code = self.exec command, stdout: stdout, stderr: stderr
+        raise "Command fail - Exit code #{exit_code} - #{command}" if exit_code != 0
+      end
+
       def self.start(*args)
         stream = self.new *args
         yield stream
+      ensure
         stream.close
         nil
       end
