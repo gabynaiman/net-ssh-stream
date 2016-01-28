@@ -1,4 +1,4 @@
-# Net::Ssh::Stream
+# Net::SSH::Stream
 
 [![Gem Version](https://badge.fury.io/rb/net-ssh-stream.png)](https://rubygems.org/gems/net-ssh-stream)
 [![Build Status](https://travis-ci.org/gabynaiman/net-ssh-stream.png?branch=master)](https://travis-ci.org/gabynaiman/net-ssh-stream)
