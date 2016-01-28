@@ -17,7 +17,10 @@ module Net
         end
       end
 
-      def exec(command, stdout: STDOUT, stderr: STDERR)
+      def exec(command, options={})
+        stdout = options.fetch(:stdout, STDOUT)
+        stderr = options.fetch(:stderr, STDERR)
+
         exit_code = nil
         
         @session.open_channel do |channel|
@@ -45,8 +48,8 @@ module Net
         exit_code
       end
 
-      def exec!(command, stdout: STDOUT, stderr: STDERR)
-        exit_code = self.exec command, stdout: stdout, stderr: stderr
+      def exec!(command, options={})
+        exit_code = self.exec command, options
         raise "Command fail - Exit code #{exit_code} - #{command}" if exit_code != 0
       end
 

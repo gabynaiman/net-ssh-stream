@@ -4,7 +4,9 @@ describe Net::SSH::Stream do
 
   let(:username) { `whoami`.strip }
 
-  def exec(command, stdout: STDOUT, stderr: STDERR)
+  def exec(command, options={})
+    stdout = options.fetch(:stdout, STDOUT)
+    stderr = options.fetch(:stderr, STDERR)
     exit_status = nil
     Net::SSH::Stream.start('localhost', username) do |stram|
       exit_status = stram.exec command, stdout: stdout, stderr: stderr
